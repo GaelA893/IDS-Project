@@ -2,11 +2,11 @@
 
 | Role | Name | GitHub | Personality type | Owns |
 |---|---|---|---|---|
-| **A: Data and infrastructure** | | | | Dataset, loading, splits, environment, figures |
-| **B: Experiments** | | | | Running KitNET, compatibility fixes, sensitivity runs |
-| **C: Evaluation and report** | | | | Paper targets, metrics, comparison, write-up |
+| **A: Data and infrastructure** | Gael Angulo | @GaelA893 | | Dataset, loading, splits, environment, figures |
+| **B: Experiments** | | @L1PsterGram | | Running KitNET, compatibility fixes, sensitivity runs |
+| **C: Evaluation and report** | | @meggy | | Paper targets, metrics, comparison, write-up |
 
-Fill in names and GitHub usernames, then assign the issues labeled `role:A`, `role:B`, `role:C`.
+Each person fills in their name and personality type (issue #2).
 
 ## Plan (each item is a GitHub issue on the Project board)
 
