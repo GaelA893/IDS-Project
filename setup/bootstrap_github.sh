@@ -25,7 +25,8 @@ W3="Week 3: Analyze and report";  W3_DUE="2026-12-10T23:59:00Z"
 echo "== Repo: $REPO"
 
 # ---------- labels ----------
-label() { gh label create "$1" --repo "$REPO" --color "$2" --description "$3" 2>/dev/null && echo "label: $1" || echo "label exists: $1"; }
+# REST only (gh api), so this also works where GraphQL is unavailable.
+label() { gh api -X POST "repos/$REPO/labels" -f name="$1" -f color="$2" -f description="$3" >/dev/null 2>&1 && echo "label: $1" || echo "label exists: $1"; }
 label "role:A" "1d76db" "Data and infrastructure"
 label "role:B" "5319e7" "Experiments"
 label "role:C" "0e8a16" "Evaluation and report"
@@ -48,15 +49,16 @@ milestone "$W2" "$W2_DUE" "Full KitNET runs on Mirai, SYN DoS, ARP MitM with met
 milestone "$W3" "$W3_DUE" "Comparison vs paper, sensitivity runs, wiki report, presentation."
 
 # ---------- issues ----------
-EXISTING="$(gh issue list --repo "$REPO" --state all --limit 500 --json title --jq '.[].title')"
-CREATED_URLS=()
-issue() { # title milestone labels assignee-csv body
+EXISTING="$(gh api "repos/$REPO/issues?state=all&per_page=100" --paginate --jq '.[].title')"
+ms_number() { gh api "repos/$REPO/milestones?state=all&per_page=100" --jq ".[] | select(.title==\"$1\") | .number"; }
+issue() { # title milestone labels-csv assignee-csv body
   local title="$1" ms="$2" labels="$3" who="$4" body="$5"
   if grep -Fxq "$title" <<<"$EXISTING"; then echo "issue exists: $title"; return; fi
-  local args=(--repo "$REPO" --title "$title" --milestone "$ms" --label "$labels" --body "$body")
-  [ -n "$who" ] && args+=(--assignee "$who")
-  local url; url="$(gh issue create "${args[@]}")"
-  echo "issue: $title -> $url"; CREATED_URLS+=("$url")
+  local args=(-X POST "repos/$REPO/issues" -f title="$title" -f body="$body" -F milestone="$(ms_number "$ms")")
+  local l; IFS=, read -ra L <<<"$labels"; for l in "${L[@]}"; do args+=(-f "labels[]=$l"); done
+  if [ -n "$who" ]; then IFS=, read -ra A <<<"$who"; for l in "${A[@]}"; do args+=(-f "assignees[]=$l"); done; fi
+  local url; url="$(gh api "${args[@]}" --jq '.html_url')"
+  echo "issue: $title -> $url"
 }
 ALL="$(printf '%s,' $ROLE_A $ROLE_B $ROLE_C | sed 's/,$//')"
 
@@ -161,7 +163,7 @@ if [ -z "$SKIP_PROJECT" ]; then
   fi
   gh project link "$NUM" --owner "$OWNER" --repo "$REPO" 2>/dev/null || true
   # add every open issue (idempotent: adding twice is a no-op)
-  for url in $(gh issue list --repo "$REPO" --state open --limit 500 --json url --jq '.[].url'); do
+  for url in $(gh api "repos/$REPO/issues?state=open&per_page=100" --paginate --jq '.[] | select(.pull_request == null) | .html_url'); do
     gh project item-add "$NUM" --owner "$OWNER" --url "$url" >/dev/null && echo "board: $url"
   done
   echo "Board: https://github.com/users/$OWNER/projects/$NUM"
@@ -174,7 +176,13 @@ if [ -z "$SKIP_WIKI" ] && [ -d setup/wiki ]; then
   if git clone -q "https://github.com/$REPO.wiki.git" "$TMP/wiki" 2>/dev/null; then
     cp setup/wiki/*.md "$TMP/wiki/"
     git -C "$TMP/wiki" add -A
-    git -C "$TMP/wiki" commit -qm "Wiki: Kitsune reproduction pages" && git -C "$TMP/wiki" push -q && echo "wiki pushed" || echo "wiki already up to date"
+    if git -C "$TMP/wiki" diff --cached --quiet; then
+      echo "wiki already up to date"
+    elif git -C "$TMP/wiki" commit -qm "Wiki: Kitsune reproduction pages" && git -C "$TMP/wiki" push -q; then
+      echo "wiki pushed: https://github.com/$REPO/wiki"
+    else
+      echo "!! Wiki push failed. Run this script from your own machine (logged in as a repo admin)."
+    fi
   else
     echo "!! Wiki not reachable. Enable it (Settings → Features → Wikis), create any first page in the browser, then re-run."
   fi
