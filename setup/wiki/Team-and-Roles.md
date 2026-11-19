@@ -24,7 +24,7 @@ Each person fills in their name and personality type (issue #2).
 ### Week 2: Reproduce (Thu Nov 27 to Wed Dec 3)
 | Role | Task |
 |---|---|
-| B | Full run on Mirai (both split rules from U1) |
+| B | Full runs on Mirai (m=10 and m=1) |
 | B | Full runs on SYN DoS and ARP MitM |
 | B | Record environment and timing for every run |
 | C | Validate metric code; compute Mirai metrics vs paper |
