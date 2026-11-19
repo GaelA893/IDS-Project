@@ -1,0 +1,27 @@
+{
+  "_source": "Mirsky et al., Kitsune, NDSS 2018. Fig. 9 bar labels (AUC bottom-left, EER bottom-right) and Table III. Values read from the PDF; double-check against the paper before quoting.",
+  "_tolerance": {"auc_abs": 0.02, "eer_abs": 0.02},
+  "attacks": {
+    "Mirai": {
+      "packets": 764137,
+      "train_minutes": 52.0,
+      "execute_minutes": 66.9,
+      "kitsune_m10": {"auc": 0.99919, "eer": 0.00317},
+      "kitsune_m1":  {"auc": 0.99857, "eer": 0.00320}
+    },
+    "SYN_DoS": {
+      "packets": 2771276,
+      "train_minutes": 18.7,
+      "execute_minutes": 34.1,
+      "kitsune_m10": {"auc": 0.95024, "eer": 0.07735},
+      "kitsune_m1":  {"auc": 0.92289, "eer": 0.13557}
+    },
+    "ARP_MitM": {
+      "packets": 2504267,
+      "train_minutes": 8.05,
+      "execute_minutes": 20.1,
+      "kitsune_m10": {"auc": 0.58423, "eer": 0.45239},
+      "kitsune_m1":  {"auc": 0.79499, "eer": 0.23152}
+    }
+  }
+}
