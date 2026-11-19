@@ -18,19 +18,23 @@ Kitsune with ensemble size *m* = 10 reaches the AUC and EER in **Fig. 9** on thr
 An attack counts as **reproduced** if our AUC and our EER are each within **0.02** of the paper's value.
 Targets live in [`configs/paper_targets.json`](configs/paper_targets.json). The *m* = 1 values are recorded there too.
 
-## Quick start
+## New here? Start with these
+1. **[docs/GETTING_STARTED.md](docs/GETTING_STARTED.md)**: install everything and run your first test, step by step (Windows and Mac).
+2. **[docs/HOW_TO_CONTRIBUTE.md](docs/HOW_TO_CONTRIBUTE.md)**: branch, commit, pull request, review.
+3. Open **your issue** on the [Issues tab](https://github.com/GaelA893/IDS-Project/issues) and follow its numbered steps.
+
+## Main commands
 
 ```bash
-pip install -r requirements.txt
-bash scripts/get_kitsune_code.sh          # authors' KitNET into external/ (not committed)
-# put the dataset files in data/raw/<Attack>/  (see wiki: Data-Plan)
 python scripts/check_data.py              # proof the data loads
-python src/run_kitnet.py --attack Mirai --limit 50000 --fm-grace 5000 --ad-grace 20000   # 1-minute smoke test
-python src/run_kitnet.py --attack SYN_DoS # full run, paper-style split (first 1M packets train)
+python scripts/run_all.py Mirai           # official runs (m=10 and m=1) for one attack
+python scripts/sensitivity.py             # vary the settings the paper doesn't give
+python scripts/compare_results.py         # paper-vs-ours table (Markdown, ready for the wiki)
+python scripts/make_figures.py            # ROC and anomaly-score plots into figures/
 pytest -q                                 # metric unit tests
 ```
 
-Each run writes `results/<attack>_m<m>_train<N>.json` (settings, metrics, comparison to the paper) and the raw anomaly scores.
+Each run writes `results/<group>_<attack>_m<m>_...json` (settings, metrics, comparison to the paper) and the raw anomaly scores (`.npy`, not committed).
 
 ## Repository layout
 
@@ -40,6 +44,11 @@ src/data.py                  loads <Attack>_dataset.csv + <Attack>_labels.csv
 src/run_kitnet.py            runs the authors' KitNET over the packets, scores the test part
 src/evaluate.py              AUC, EER, TPR at FPR = 0 / 0.001, and paper comparison
 scripts/check_data.py        data-loading proof for the proposal
+scripts/run_all.py           official m=10 and m=1 runs with the agreed split
+scripts/sensitivity.py       one-setting-at-a-time variations
+scripts/compare_results.py   builds the paper-vs-ours table
+scripts/make_figures.py      ROC + anomaly-score figures
+docs/                        beginner setup and Git guides
 scripts/get_kitsune_code.sh  fetches the reference implementation
 tests/                       unit tests for the metrics
 setup/bootstrap_github.sh    creates labels, milestones, issues and the project board

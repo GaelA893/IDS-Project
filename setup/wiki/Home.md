@@ -4,6 +4,8 @@ IDS capstone reproduction study. We rebuild the evaluation of **Kitsune** (Mirsk
 
 **Timeline:** Thu Nov 20 to Wed Dec 10, 2026 (3 weeks). **Team:** 3 people, roles A/B/C.
 
+**New to the project?** Start with [Getting Started](https://github.com/GaelA893/IDS-Project/blob/main/docs/GETTING_STARTED.md) and [How to Contribute](https://github.com/GaelA893/IDS-Project/blob/main/docs/HOW_TO_CONTRIBUTE.md), then open your issue on the [Issues tab](https://github.com/GaelA893/IDS-Project/issues).
+
 ## Pages
 
 | Page | What's in it | Owner |

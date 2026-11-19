@@ -20,10 +20,27 @@ DATA_ROOT = Path(__file__).resolve().parents[1] / "data" / "raw"
 N_FEATURES = 115  # paper, Section IV-B
 
 
+def _norm(name: str) -> str:
+    return "".join(ch for ch in name.lower() if ch.isalnum())
+
+
+def find_attack_dir(attack: str, root: Path = DATA_ROOT) -> Path:
+    """Find the folder for an attack, ignoring case, spaces and underscores
+    (so 'SYN_DoS', 'syn_dos' and 'SYN DoS' all work)."""
+    if root.exists():
+        for d in root.iterdir():
+            if d.is_dir() and _norm(d.name) == _norm(attack):
+                return d
+    raise FileNotFoundError(
+        f"No folder for '{attack}' in {root}. Expected e.g. data/raw/{attack}/ "
+        "containing the _dataset.csv(.gz) and _labels.csv(.gz) files. See docs/GETTING_STARTED.md step 6.")
+
+
 def _find(attack_dir: Path, suffix: str) -> Path:
-    matches = sorted(attack_dir.glob(f"*{suffix}"))
+    # Accept plain or gzipped CSVs (UCI serves .csv.gz; pandas reads both).
+    matches = sorted(attack_dir.glob(f"*{suffix}")) + sorted(attack_dir.glob(f"*{suffix}.gz"))
     if not matches:
-        raise FileNotFoundError(f"No *{suffix} in {attack_dir}. See wiki: Data-Plan.")
+        raise FileNotFoundError(f"No *{suffix} or *{suffix}.gz in {attack_dir}. See docs/GETTING_STARTED.md step 6.")
     return matches[0]
 
 
@@ -43,7 +60,7 @@ def _drop_header_and_index(df: pd.DataFrame) -> pd.DataFrame:
 
 def load_attack(attack: str, root: Path = DATA_ROOT, limit: int | None = None):
     """Return (X, y) as float32 features [n_packets, 115] and int labels [n_packets]."""
-    attack_dir = root / attack
+    attack_dir = find_attack_dir(attack, root)
     X = pd.read_csv(_find(attack_dir, "_dataset.csv"), header=None, nrows=limit)
     X = _drop_header_and_index(X)
     y = pd.read_csv(_find(attack_dir, "_labels.csv"), header=None, nrows=limit)

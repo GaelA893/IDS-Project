@@ -25,7 +25,9 @@ data/raw/ARP_MitM/ARP_MitM_labels.csv
 The loader matches `*_dataset.csv` and `*_labels.csv`, so the exact file prefix doesn't matter.
 
 ## Proof of loading
-Run `python scripts/check_data.py` and paste the output here:
+Step-by-step download instructions: [docs/GETTING_STARTED.md, step 6](https://github.com/GaelA893/IDS-Project/blob/main/docs/GETTING_STARTED.md#step-6-get-the-dataset).
+
+Run `python scripts/check_data.py --save` and paste the output here:
 
 ```
 (paste output: attack, packets, paper count, features, malicious share)

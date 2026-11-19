@@ -41,6 +41,7 @@ def main() -> None:
     p.add_argument("--hidden-ratio", type=float, default=0.75, help="KitNET code default")
     p.add_argument("--limit", type=int, default=None, help="only load the first N packets (for quick tests)")
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--group", default="adhoc", help="main | sensitivity | adhoc (used by compare_results.py)")
     p.add_argument("--out", type=Path, default=ROOT / "results")
     a = p.parse_args()
 
@@ -51,7 +52,7 @@ def main() -> None:
     try:
         from KitNET.KitNET import KitNET
     except ImportError:
-        sys.exit("KitNET not found. Run: bash scripts/get_kitsune_code.sh")
+        sys.exit("KitNET not found. Run: git clone --depth 1 https://github.com/ymirsky/Kitsune-py external/Kitsune-py  (docs/GETTING_STARTED.md step 7)")
 
     np.random.seed(a.seed)
     X, y = load_attack(a.attack, limit=a.limit)
@@ -68,6 +69,8 @@ def main() -> None:
                  "Use --train-frac (see wiki: Underspecification-Register, U1).")
 
     fm = a.fm_grace if a.fm_grace is not None else max(1, n_train // 10)
+    if fm >= n_train:
+        sys.exit(f"--fm-grace ({fm:,}) must be smaller than the training split ({n_train:,}).")
     ad = a.ad_grace if a.ad_grace is not None else n_train - fm
     if fm + ad != n_train:
         print(f"[note] fm_grace + ad_grace = {fm + ad}, training split = {n_train}")
@@ -88,13 +91,15 @@ def main() -> None:
     metrics = all_metrics(test_y, test_s)
     try:
         metrics["vs_paper"] = compare_to_paper(a.attack, metrics, f"kitsune_m{a.m}")
-    except KeyError:
+    except (KeyError, StopIteration):
         pass
 
-    tag = f"{a.attack}_m{a.m}_train{n_train}" + (f"_limit{a.limit}" if a.limit else "")
+    safe = "".join(c if c.isalnum() else "_" for c in a.attack)
+    tag = (f"{a.group}_{safe}_m{a.m}_train{n_train}_fm{fm}_ad{ad}_lr{a.lr}_hr{a.hidden_ratio}"
+           + (f"_limit{a.limit}" if a.limit else ""))
     a.out.mkdir(parents=True, exist_ok=True)
     np.save(a.out / f"{tag}_scores.npy", scores)
-    run = {"args": {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(a).items()},
+    run = {"tag": tag, "group": a.group, "attack": a.attack, "m": a.m, "args": {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(a).items()},
            "n_packets": n, "n_train": n_train, "fm_grace": fm, "ad_grace": ad,
            "seconds": round(elapsed, 1), "python": platform.python_version(), "metrics": metrics}
     (a.out / f"{tag}.json").write_text(json.dumps(run, indent=2))

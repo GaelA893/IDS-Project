@@ -41,7 +41,9 @@ def all_metrics(y_true, scores) -> dict:
 def compare_to_paper(attack: str, metrics: dict, variant: str = "kitsune_m10") -> dict:
     cfg = json.loads(TARGETS.read_text())
     tol = cfg["_tolerance"]
-    paper = cfg["attacks"][attack][variant]
+    norm = lambda s: "".join(c for c in s.lower() if c.isalnum())  # noqa: E731
+    key = next(k for k in cfg["attacks"] if norm(k) == norm(attack))  # StopIteration if unknown
+    paper = cfg["attacks"][key][variant]
     d_auc = metrics["auc"] - paper["auc"]
     d_eer = metrics["eer"] - paper["eer"]
     return {
