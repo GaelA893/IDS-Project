@@ -7,7 +7,7 @@ first so it lives in external/Kitsune-py.
 Examples:
     python src/run_kitnet.py --attack Mirai --limit 50000 --fm-grace 5000 --ad-grace 20000   # smoke test
     python src/run_kitnet.py --attack SYN_DoS --train-packets 1000000 --m 10                # paper-style split
-    python src/run_kitnet.py --attack Mirai --train-frac 0.4374                             # time-based split (see wiki)
+    python src/run_kitnet.py --attack Mirai --train-packets 55000 --fm-grace 5000 --ad-grace 50000   # Mirai split (issue #12)
 """
 from __future__ import annotations
 
