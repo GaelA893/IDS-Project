@@ -14,7 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 attack = sys.argv[1] if len(sys.argv) > 1 else "Mirai"
 extra = sys.argv[2:]
-split = ["--train-frac", "0.437"] if attack.lower() == "mirai" else ["--train-packets", "1000000"]
+# Same split as scripts/run_all.py (issue #12): Mirai trains on its first 55,000 (all-benign) packets
+split = ["--train-packets", "55000"] if attack.lower() == "mirai" else ["--train-packets", "1000000"]
 
 VARIANTS = {
     "U3 feature-map grace 5,000 (authors' demo value)": ["--fm-grace", "5000"],
