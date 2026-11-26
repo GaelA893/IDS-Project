@@ -1,0 +1,4 @@
+attack        packets      paper  feat  malicious
+ARP_MitM    2,504,267    2504267   115     45.73%
+Mirai         764,137     764137   115     84.08%
+SYN_DoS     2,771,276    2771276   115      0.25%
