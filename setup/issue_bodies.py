@@ -11,7 +11,7 @@ BLOB = f"https://github.com/{REPO}/blob/main"
 WIKI = f"https://github.com/{REPO}/wiki"
 GS = f"[Getting Started]({BLOB}/docs/GETTING_STARTED.md)"
 HC = f"[How to Contribute]({BLOB}/docs/HOW_TO_CONTRIBUTE.md)"
-ACT = "*(open a terminal, `cd ~/Documents/IDS-Project`, and activate the environment: Windows `.venv\\Scripts\\Activate.ps1`, Mac `source .venv/bin/activate`)*"
+ACT = "*(open a terminal, `cd ~/Documents/IDS-Project`, and activate the environment: Windows PowerShell `.\\.venv\\Scripts\\Activate.ps1` (Git Bash: `source .venv/Scripts/activate`), Mac `source .venv/bin/activate`)*"
 
 
 def body(goal, time, needs, steps, done, extra_stuck="", reviewer=""):
