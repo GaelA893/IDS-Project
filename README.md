@@ -57,19 +57,25 @@ data/ external/ results/     git-ignored (data is large, results are regenerated
 
 ## Team and plan
 
-Three people, three weeks (Nov 20 to Dec 10, 2026). Roles, tasks and deadlines are on the **Project board** and in the wiki page **Team-and-Roles**.
+Three people, one phase, due **Wed Dec 3, 2026** (presentation day). Each person owns one attack from start to finish
+(runs, figures, results section, slides) plus one cross-cutting task, so the work is split evenly. Tasks are GitHub issues.
 
-| Role | Owns |
-|---|---|
-| **A: Data and infrastructure** | dataset download and loading, splits, figures |
-| **B: Experiments** | running KitNET, compatibility fixes, sensitivity runs |
-| **C: Evaluation and report** | paper targets, metrics, comparison, final write-up |
+| Person | Attack | Cross-cutting task | Report sections |
+|---|---|---|---|
+| Gael (@GaelA893) | Mirai | Training split per attack (#12) | intro, method, results-mirai |
+| L1PsterGram (@L1PsterGram) | SYN DoS | Smoke test (#5), sensitivity + environment (#14) | results-syn-dos, sensitivity |
+| meggy (@megifrausto-design) | ARP MitM | Paper targets (#6), metrics + comparison (#11) | results-arp-mitm, comparison, discussion |
 
-Working rules: one branch and one pull request per issue, PR description says `Closes #N`, and someone other than the author reviews it. Commits are our record of effort.
+Checkpoints: **Fri Nov 28** everyone can run a 50k test · **Sun Nov 30** all main results merged ·
+**Mon Dec 1** comparison + figures merged · **Tue Dec 2** report + slides done.
+If behind, cut in this order: sensitivity to 2 runs → m = 1 runs for SYN DoS / ARP MitM → ARP MitM. Mirai m = 10 is never cut.
+
+Working rules: one branch and one pull request per issue, PR description says `Closes #N`, and someone other than the author
+reviews it (Gael reviews L1PsterGram, L1PsterGram reviews meggy, meggy reviews Gael). Commits are our record of effort.
 
 ## Known reproduction issues (details in the wiki)
 
-* **Mirai has fewer than 1M packets**, but the paper says training uses the first million. Table III instead gives train and execute *minutes*.
+* **Mirai can't use the paper's "first 1M packets" training rule**: it has 764,137 packets and its attack runs from packet 121,621 to the end. We train on its first 55,000 packets (the authors' own Kitsune-py settings), which are all benign and leave benign packets for testing (#12).
 * The paper gives no numeric learning rate, grace periods, or threshold; we use the authors' code defaults and test sensitivity.
 * The authors' code uses `np.Inf`, which was removed in NumPy 2.0; `run_kitnet.py` adds a one-line shim.
 
