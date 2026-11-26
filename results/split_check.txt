@@ -1,0 +1,33 @@
+=== ARP_MitM ===
+  packets total                 : 2,504,267
+  malicious packets             : 1,145,272 (45.73%)
+  first malicious packet index  : 1,300,000 (51.9% of capture)
+  last malicious packet index   : 2,504,266 (100.0% of capture)
+  attack bursts (benign->attack): 49,867
+  current rule                  : first 1,000,000 packets = packets 0..999,999
+  attack packets inside training: 0 (0.00% of training)
+  test portion                  : 1,504,267 packets = 358,995 benign + 1,145,272 malicious
+  VERDICT: OK. Training is all benign and the test portion has both classes.
+
+=== Mirai ===
+  packets total                 : 764,137
+  malicious packets             : 642,516 (84.08%)
+  first malicious packet index  : 121,621 (15.9% of capture)
+  last malicious packet index   : 764,136 (100.0% of capture)
+  attack bursts (benign->attack): 1
+  current rule                  : first 55,000 packets = packets 0..54,999
+  attack packets inside training: 0 (0.00% of training)
+  test portion                  : 709,137 packets = 66,621 benign + 642,516 malicious
+  VERDICT: OK. Training is all benign and the test portion has both classes.
+
+=== SYN_DoS ===
+  packets total                 : 2,771,276
+  malicious packets             : 7,038 (0.25%)
+  first malicious packet index  : 2,682,349 (96.8% of capture)
+  last malicious packet index   : 2,771,275 (100.0% of capture)
+  attack bursts (benign->attack): 1,113
+  current rule                  : first 1,000,000 packets = packets 0..999,999
+  attack packets inside training: 0 (0.00% of training)
+  test portion                  : 1,771,276 packets = 1,764,238 benign + 7,038 malicious
+  VERDICT: OK. Training is all benign and the test portion has both classes.
+

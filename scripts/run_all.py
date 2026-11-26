@@ -6,7 +6,10 @@
 
 Split rules are fixed here so everyone runs exactly the same thing
 (see wiki Underspecification-Register U1/U2):
-  * Mirai has fewer than 1M packets -> train on the first 43.7 % (Table III: 52.0 of 118.9 minutes)
+  * Mirai -> train on the first 55,000 packets (feature-map grace 5,000 + anomaly-detector grace 50,000),
+    the authors' own settings for this capture in Kitsune-py. The attack starts at packet 121,621 and never
+    stops, so the paper's "first 1M packets" (or 43.7 %) would train on attack traffic and leave no benign
+    packets to test on. Decided in issue #12; see results/split_check.txt.
   * every other attack -> train on the first 1,000,000 packets (paper Section V-A)
 
 Each run takes ~10 min (Mirai) to ~40 min (SYN DoS / ARP MitM). Leave the window open.
@@ -16,7 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SPLITS = {"mirai": ["--train-frac", "0.437"]}
+SPLITS = {"mirai": ["--train-packets", "55000", "--fm-grace", "5000", "--ad-grace", "50000"]}
 DEFAULT_SPLIT = ["--train-packets", "1000000"]
 
 if len(sys.argv) < 2:
