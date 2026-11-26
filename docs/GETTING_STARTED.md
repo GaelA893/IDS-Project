@@ -59,7 +59,7 @@ Create a private Python environment so this project's packages don't clash with 
 **Windows:**
 ```
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 ```
 If you see *"running scripts is disabled on this system"*, run this once, answer `Y`, and then try the activate line again:
 ```
@@ -71,6 +71,8 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 python3 -m venv .venv
 source .venv/bin/activate
 ```
+
+Using **Git Bash** instead of PowerShell? Activate with `source .venv/Scripts/activate`.
 
 You should now see `(.venv)` at the start of your terminal line. **Activate it every time you open a new terminal** (just the second line).
 
@@ -130,7 +132,7 @@ You should see progress lines, then a block with `"auc"` and `"eer"`, then `Save
 | What | Command |
 |---|---|
 | Go to the project | `cd ~/Documents/IDS-Project` |
-| Turn on the environment | Windows: `.venv\Scripts\Activate.ps1` · Mac: `source .venv/bin/activate` |
+| Turn on the environment | Windows: `.\.venv\Scripts\Activate.ps1` · Mac: `source .venv/bin/activate` |
 | Check data loads | `python scripts/check_data.py` |
 | Official runs for one attack | `python scripts/run_all.py Mirai` (or `SYN_DoS`, `ARP_MitM`) |
 | Sensitivity runs | `python scripts/sensitivity.py` |
@@ -146,6 +148,7 @@ To save your work to GitHub, see **docs/HOW_TO_CONTRIBUTE.md**.
    | Error says | Fix |
    |---|---|
    | `'python' is not recognized` | Python isn't on PATH: reinstall and tick "Add python.exe to PATH" (Step 1) |
+   | `The module '.venv' could not be loaded` | The environment doesn't exist in this folder yet: run `python -m venv .venv` first (Step 5), then `.\.venv\Scripts\Activate.ps1` (keep the `.\` at the start) |
    | `No module named ...` | You forgot to activate `.venv` (Step 5), or run `pip install -r requirements.txt` again |
    | `No folder for 'Mirai'` / `No *_dataset.csv` | Data isn't in `data/raw/<Attack>/` (Step 6) |
    | `KitNET not found` | Do Step 7 |
