@@ -1,0 +1,43 @@
+{
+  "tag": "adhoc_Mirai_m10_train55000_fm5000_ad50000_lr0.1_hr0.75_limit200000",
+  "group": "adhoc",
+  "attack": "Mirai",
+  "m": 10,
+  "args": {
+    "attack": "Mirai",
+    "m": 10,
+    "train_packets": 55000,
+    "train_frac": null,
+    "fm_grace": 5000,
+    "ad_grace": 50000,
+    "lr": 0.1,
+    "hidden_ratio": 0.75,
+    "limit": 200000,
+    "seed": 0,
+    "group": "adhoc",
+    "out": "C:\\Users\\Main\\Downloads\\IDS-Project\\results"
+  },
+  "n_packets": 200000,
+  "n_train": 55000,
+  "fm_grace": 5000,
+  "ad_grace": 50000,
+  "seconds": 55.2,
+  "python": "3.12.10",
+  "metrics": {
+    "n": 145000,
+    "malicious_frac": 0.5405448275862069,
+    "auc": 0.9361570576558145,
+    "eer": 0.11384225014456675,
+    "tpr@fpr=0": 0.8128197603950038,
+    "tpr@fpr=0.001": 0.8518225545107746,
+    "vs_paper": {
+      "paper_auc": 0.99919,
+      "ours_auc": 0.9361570576558145,
+      "delta_auc": -0.06303294234418555,
+      "paper_eer": 0.00317,
+      "ours_eer": 0.11384225014456675,
+      "delta_eer": 0.11067225014456675,
+      "reproduced": false
+    }
+  }
+}
