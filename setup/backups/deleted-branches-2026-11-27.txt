@@ -1,0 +1,14 @@
+# Branches deleted on 2026-11-27 (all fully merged into main; no open pull requests)
+# To restore one, run the line for it (needs gh, logged in):
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/feature/kitsune-baseline -f sha=0e5b3af678c41117e07fee25d41d73eb7c501dbe
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/feature/your-task-name -f sha=0e5b3af678c41117e07fee25d41d73eb7c501dbe
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/fix/ps-activate -f sha=9255f199516b8990eceb7f09fdef241dd05b9a52
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/issue-2-GaelA893 -f sha=be9aaf6bdb189b972e57681a3a256e820ccdf8e9
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/issue-2-L1PsterGram-profile -f sha=1a33ee843292d3a701186fb2714df63f06f6109f
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/issue-2-megifrausto-design -f sha=dcb4ab5a781f1f357524609c8b561ec81c61c85d
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/issue-4-data -f sha=e83531c2c22137d40b5ccbc4b7b84e447e494960
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/issue-5-smoke-test -f sha=a593c7de37000167407e8d7bc0fa170cbe6d0ae6
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/issue-12-split -f sha=5c69a7d6ce953637a2cabb303ed9a3c4d504e770
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/plan-v3 -f sha=5c011b4e204b52e5b6c6461460fbbb954260a4d4
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/sensitivity-v3 -f sha=f7d5f5e9ab87d02455c026b11b928a944eb6e73f
+gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/setup/kitsune-reproduction -f sha=265f129365c9449c9cdb71e83f59129945f6b437
