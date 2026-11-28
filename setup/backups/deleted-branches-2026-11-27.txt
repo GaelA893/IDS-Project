@@ -1,4 +1,4 @@
-# Branches deleted on 2026-11-27 (all fully merged into main; no open pull requests)
+# Merged branches cleaned up on 2026-11-27 (all fully merged into main; no open pull requests)
 # To restore one, run the line for it (needs gh, logged in):
 gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/feature/kitsune-baseline -f sha=0e5b3af678c41117e07fee25d41d73eb7c501dbe
 gh api -X POST repos/GaelA893/IDS-Project/git/refs -f ref=refs/heads/feature/your-task-name -f sha=0e5b3af678c41117e07fee25d41d73eb7c501dbe
