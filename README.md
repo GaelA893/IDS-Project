@@ -57,7 +57,7 @@ data/ external/ results/     git-ignored (data is large, results are regenerated
 
 ## Team and plan
 
-Three people, one phase, due **Wed Dec 3, 2026** (presentation day). Each person owns one attack from start to finish
+Three people, one phase, due **Thu Dec 3, 2026** (presentation day). Each person owns one attack from start to finish
 (runs, figures, results section, slides) plus one cross-cutting task, so the work is split evenly. Tasks are GitHub issues.
 
 | Person | Attack | Cross-cutting task | Report sections |
@@ -66,8 +66,8 @@ Three people, one phase, due **Wed Dec 3, 2026** (presentation day). Each person
 | L1PsterGram (@L1PsterGram) | SYN DoS | Smoke test (#5), sensitivity + environment (#14) | results-syn-dos, sensitivity |
 | meggy (@megifrausto-design) | ARP MitM | Paper targets (#6), metrics + comparison (#11) | results-arp-mitm, comparison, discussion |
 
-Checkpoints: **Fri Nov 28** everyone can run a 50k test · **Sun Nov 30** all main results merged ·
-**Mon Dec 1** comparison + figures merged · **Tue Dec 2** report + slides done.
+Checkpoints: **Sat Nov 28** everyone can run a 50k test · **Mon Nov 30** all main results merged ·
+**Tue Dec 1** comparison + figures merged · **Wed Dec 2** report + slides done.
 If behind, cut in this order: sensitivity to 2 runs → m = 1 runs for SYN DoS / ARP MitM → ARP MitM. Mirai m = 10 is never cut.
 
 Working rules: one branch and one pull request per issue, PR description says `Closes #N`, and someone other than the author

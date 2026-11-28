@@ -2,7 +2,7 @@
 
 IDS capstone reproduction study. We rebuild the evaluation of **Kitsune** (Mirsky et al., NDSS 2018), an online unsupervised network intrusion detector, and check whether its AUC and EER in Fig. 9 hold up on three attacks: **Mirai, SYN DoS, ARP MitM**.
 
-**Timeline:** Thu Nov 20 to Wed Dec 10, 2026 (3 weeks). **Team:** 3 people, roles A/B/C.
+**Timeline:** Fri Nov 20 to Thu Dec 10, 2026 (3 weeks). **Team:** 3 people, roles A/B/C.
 
 **New to the project?** Start with [Getting Started](https://github.com/GaelA893/IDS-Project/blob/main/docs/GETTING_STARTED.md) and [How to Contribute](https://github.com/GaelA893/IDS-Project/blob/main/docs/HOW_TO_CONTRIBUTE.md), then open your issue on the [Issues tab](https://github.com/GaelA893/IDS-Project/issues).
 

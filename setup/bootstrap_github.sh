@@ -44,7 +44,7 @@ milestone() {
     gh api -X POST "repos/$REPO/milestones" -f title="$1" -f due_on="$2" -f description="$3" >/dev/null && echo "milestone: $1"
   fi
 }
-milestone "$W1" "$W1_DUE" "Data loads, authors' code runs, paper targets confirmed. Aim for Tue Nov 25 (Thanksgiving)."
+milestone "$W1" "$W1_DUE" "Data loads, authors' code runs, paper targets confirmed. Aim for Wed Nov 25 (Thanksgiving)."
 milestone "$W2" "$W2_DUE" "Full KitNET runs on Mirai, SYN DoS, ARP MitM with metrics."
 milestone "$W3" "$W3_DUE" "Comparison vs paper, sensitivity runs, wiki report, presentation."
 

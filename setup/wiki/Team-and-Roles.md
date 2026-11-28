@@ -10,8 +10,8 @@ Each person fills in their name and personality type (issue #2).
 
 ## Plan (each item is a GitHub issue on the Project board)
 
-### Week 1: Setup and data (Thu Nov 20 to Wed Nov 26)
-*Thanksgiving is Thu Nov 27; aim to finish Week 1 by Tuesday Nov 25.*
+### Week 1: Setup and data (Fri Nov 20 to Thu Nov 26)
+*Thanksgiving is Thu Nov 26; aim to finish Week 1 by Wednesday Nov 25.*
 | Role | Task |
 |---|---|
 | All | Onboarding: clone, install, run tests, open first PR (add yourself to this page) |
@@ -21,7 +21,7 @@ Each person fills in their name and personality type (issue #2).
 | C | Independently re-read Fig. 9 / Table III targets; confirm [[Paper-and-Claim]] |
 | C | Set up wiki pages and seed [[Underspecification-Register]] |
 
-### Week 2: Reproduce (Thu Nov 27 to Wed Dec 3)
+### Week 2: Reproduce (Fri Nov 27 to Thu Dec 3)
 | Role | Task |
 |---|---|
 | B | Full runs on Mirai (m=10 and m=1) |
@@ -30,7 +30,7 @@ Each person fills in their name and personality type (issue #2).
 | C | Validate metric code; compute Mirai metrics vs paper |
 | A | Decide and document the split rule for each attack (U1, U2) |
 
-### Week 3: Analyze and report (Thu Dec 4 to Wed Dec 10)
+### Week 3: Analyze and report (Fri Dec 4 to Thu Dec 10)
 | Role | Task |
 |---|---|
 | C | Paper-vs-ours comparison table in [[Results]] |

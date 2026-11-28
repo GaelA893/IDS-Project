@@ -1,4 +1,4 @@
-"""Apply the Nov 25 consolidated plan (one phase, due Wed Dec 3) to GitHub issues and milestones.
+"""Apply the Nov 25 consolidated plan (one phase, due Thu Dec 3) to GitHub issues and milestones.
 
     python setup/plan_v3.py            # dry run: print what would change
     python setup/plan_v3.py --apply    # do it (needs gh, logged in with write access)
@@ -48,7 +48,7 @@ def attack_issue(name, slug, cmd_name, owner, reviewer, runtime, extra_first, ov
         f"~2 h of your time ({runtime} of computer time)",
         f"{extra_first}; PR #28 merged (lower-memory loader)",
         f"""
-**Part 1: results (by Sun Nov 30)**
+**Part 1: results (by Mon Nov 30)**
 1. Get the latest code {ACT}:
    ```
    git checkout main
@@ -71,7 +71,7 @@ def attack_issue(name, slug, cmd_name, owner, reviewer, runtime, extra_first, ov
    ```
    Open the pull request with **`Part of #{{n}}`** (not Closes yet) and request **{reviewer}** as reviewer.
 
-**Part 2: write-up (by Tue Dec 2)**
+**Part 2: write-up (by Wed Dec 2)**
 8. `git checkout main`, `git pull`, `git checkout -b {slug}-writeup`.
 9. Open `report/results-{slug}.md` and replace the *italic prompts* with your own text: your two table rows, the two figures, and 3 to 5 sentences on what you see.
 10. Commit, push, pull request with `Closes #{{n}}`.
@@ -106,7 +106,7 @@ NEW = [
 2. Open `report/intro.md` (~300 words) and `report/method.md` (~400 to 500 words). Each has *italic prompts* saying what goes where; replace them with your own text.
 3. Sources you already have: the paper (§I to V), the wiki [Data-Plan]({WIKI}/Data-Plan) and [Reproduction-Log]({WIKI}/Reproduction-Log), `results/check_data.txt`, `results/split_check.txt`, #12, `src/evaluate.py`.
 4. Cite the paper as "Mirsky et al. (2018)" and refer to our issues and PRs by number.
-5. Commit both files, push, pull request with `Closes #{{n}}`, reviewer **meggy**. Target: **Mon Dec 1** (meggy's discussion builds on your method).
+5. Commit both files, push, pull request with `Closes #{{n}}`, reviewer **meggy**. Target: **Tue Dec 1** (meggy's discussion builds on your method).
 """,
              "- `report/intro.md` and `report/method.md` are written and merged.",
              reviewer="meggy")),
@@ -116,7 +116,7 @@ NEW = [
 EDITS = {
     11: dict(title="[P2] Metric check and paper-vs-ours comparison table", milestone=PHASE2, body=body(
         "Double-check that our scoring measures what the paper measures, then build the headline table: did each of the 6 numbers reproduce?",
-        "1.5 h", "all three attack issues have results merged (Sun Nov 30 checkpoint)",
+        "1.5 h", "all three attack issues have results merged (Mon Nov 30 checkpoint)",
         f"""
 **Metric check (any time)**
 1. `git checkout main`, `git pull`, `git checkout -b metrics-comparison`.
@@ -133,7 +133,7 @@ EDITS = {
    ```
    Run `pytest -q` {ACT}. You should see `4 passed`.
 
-**Comparison table (Mon Dec 1, after all results are merged)**
+**Comparison table (Tue Dec 1, after all results are merged)**
 4. `git pull` to get everyone's results.
 5. Open any `results/main_*.json`. Check that `metrics.n` equals `n_packets − n_train` (only test packets are scored). Write the three numbers in a comment here.
 6. `python scripts/compare_results.py`. Copy the **Main results** table into `report/comparison.md` and add 2 to 3 sentences: how many of the 6 rows reproduced, which was closest, which was furthest.
@@ -145,7 +145,7 @@ EDITS = {
         "Measure how much the settings the paper never gave us change the result, and record the computer and software behind our numbers.",
         "~1.5 h of your time (4 short Mirai runs)", "PR #29 merged (new sensitivity runs) and the Mirai files in `data/raw/Mirai/` (shared drive)",
         f"""
-**Sensitivity (Sun Nov 30 or Mon Dec 1)**
+**Sensitivity (Mon Nov 30 or Tue Dec 1)**
 1. `git checkout main`, `git pull`, `git checkout -b sensitivity`.
 2. Run {ACT}:
    ```
@@ -159,7 +159,7 @@ EDITS = {
    - **Windows PowerShell:** `pip freeze --all --local | Out-File -Encoding utf8 results/environment.txt`
    - **Mac / Git Bash:** `pip freeze --all --local > results/environment.txt`
 5. In `report/sensitivity.md` under *Environment and run time*: your computer (Windows Settings → System → About, or About This Mac), Python version (`python --version`), and a table of each main run's time. Get the `"seconds"` and `"n_packets"` values from every `results/main_*.json`; packets/second = n_packets ÷ seconds.
-6. Commit (`results/*.json`, `results/environment.txt`, `report/sensitivity.md`), push, pull request with `Closes #{{n}}`, reviewer **Gael**. Target: **Mon Dec 1**.
+6. Commit (`results/*.json`, `results/environment.txt`, `report/sensitivity.md`), push, pull request with `Closes #{{n}}`, reviewer **Gael**. Target: **Tue Dec 1**.
 """,
         "- 4 sensitivity results merged.\n- `report/sensitivity.md` has the table, the explanation and the environment/timing section.",
         reviewer="Gael")),
@@ -171,16 +171,16 @@ EDITS = {
 2. Read `report/comparison.md`, `report/sensitivity.md`, the three `report/results-*.md` files and the Underspecification Register.
 3. Fill in `report/discussion.md` (~500 to 700 words). It has five headings with prompts: what reproduced, what didn't (and the most likely reason, with a register ID and sensitivity result), surprises, what the authors should have reported, limitations.
 4. Ask Gael and L1PsterGram to read it (comment on the pull request) and fix what they flag.
-5. Commit, push, pull request with `Closes #{{n}}`, reviewer **L1PsterGram**. Target: **Tue Dec 2**.
+5. Commit, push, pull request with `Closes #{{n}}`, reviewer **L1PsterGram**. Target: **Wed Dec 2**.
 """,
         "- `report/discussion.md` complete with all five headings, merged.",
         reviewer="L1PsterGram")),
-    17: dict(title="[P2] Presentation slides (due Wed Dec 3)", milestone=PHASE2, body=body(
-        "Have the slides ready for the presentation on Wed Dec 3. Each person makes the slides for their own part. No rehearsal needed.",
+    17: dict(title="[P2] Presentation slides (due Thu Dec 3)", milestone=PHASE2, body=body(
+        "Have the slides ready for the presentation on Thu Dec 3. Each person makes the slides for their own part. No rehearsal needed.",
         "~1 h each", "your results section (attack issues) mostly done",
         """
 1. One person makes a shared deck (Google Slides or PowerPoint online) and posts the edit link in the team chat.
-2. Each person builds their own slides by **Tue Dec 2** (~10 slides total):
+2. Each person builds their own slides by **Wed Dec 2** (~10 slides total):
    | # | Slide | Who |
    |---|---|---|
    | 1 | Title, team, paper citation | Gael |
@@ -196,10 +196,10 @@ EDITS = {
 3. Add 2 to 3 sentences of speaker notes per slide.
 4. Export to PDF and commit it as `slides/presentation.pdf` (branch, commit, pull request with `Closes #{n}`).
 """,
-        "- `slides/presentation.pdf` merged by Wed Dec 3.")),
+        "- `slides/presentation.pdf` merged by Thu Dec 3.")),
 }
 
-PREPEND_5 = ("> **Updated Nov 25 (consolidated plan):** due **Fri Nov 28**. You can run the smoke test on your own attack: "
+PREPEND_5 = ("> **Updated Nov 25 (consolidated plan):** due **Sat Nov 28**. You can run the smoke test on your own attack: "
              "in step 2, use `--attack SYN_DoS` instead of `--attack Mirai` (put the SYN DoS files in `data/raw/SYN_DoS/`). "
              "Get the data from the team's shared drive.\n\n")
 
@@ -217,10 +217,10 @@ def main():
     # 1. milestones
     api("PATCH", "milestones/1", {"title": "Phase 1: Setup", "due_on": "2026-11-28T08:00:00Z",
         "description": "Data on the shared drive, training split decided (#12), smoke test works (#5), targets confirmed (#6). "
-                       "Checkpoint Fri Nov 28: everyone can run a 50k-packet test on their own attack."})
+                       "Checkpoint Sat Nov 28: everyone can run a 50k-packet test on their own attack."})
     api("PATCH", "milestones/2", {"title": "Phase 2: Reproduce and report", "due_on": "2026-12-03T08:00:00Z",
-        "description": "Checkpoints: Sun Nov 30 all main results merged · Mon Dec 1 comparison + figures + sensitivity · "
-                       "Tue Dec 2 report sections + slides · Wed Dec 3 present. "
+        "description": "Checkpoints: Mon Nov 30 all main results merged · Tue Dec 1 comparison + figures + sensitivity · "
+                       "Wed Dec 2 report sections + slides · Thu Dec 3 present. "
                        "If behind, cut: sensitivity to 2 runs → m = 1 for SYN DoS / ARP MitM → ARP MitM. Mirai m = 10 is never cut."})
 
     # 2. new issues
